@@ -151,4 +151,6 @@ jobs:
           echo preview-url=$(cat deployment.txt | grep '.vercel.app ' | awk '{ print $2 }') >> "$GITHUB_OUTPUT"
           echo "::notice:: Inspect the deployment at $(cat deployment.txt | grep '.vercel.com/' | awk '{ print $2 }')"
       - name: Wait for deployment to complete
-        run: vercel inspect --token=${{ secrets.VERCEL_TOKEN }} --wait ${{ steps.url.outputs.preview-url }}
+        run: vercel inspect --token=${{ secrets.VERCEL_TOKEN }} --wait ${{ steps.url.outputs.preview-url }} 2>&1 | tee out.txt
+      - name: Read deployment status
+        run: cat out.txt | grep "status" | grep "Ready" || false
