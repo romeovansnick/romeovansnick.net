@@ -5,5 +5,8 @@
 	"private": true,
 	"keywords": [],
 	"author": "Romeo Van Snick <romeo@romeovansnick.be>",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"next": "^13.4.19"
+	}
 }
