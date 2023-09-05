@@ -1,0 +1,14 @@
+{
+	"framework": "nextjs",
+	"cleanUrls": true,
+	"trailingSlash": false,
+
+	"buildCommand": "make build",
+	"devCommand": "make dev",
+	"installCommand": "pnpm install --frozen-lockfile",
+
+	"public": false,
+	"github": {
+		"enabled": false
+	}
+}
