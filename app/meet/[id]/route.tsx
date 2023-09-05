@@ -1,6 +1,12 @@
 import { redirect } from "next/navigation"
 
-export function GET(_: Request, { params }) {
-	const { id } = params
+type Context = {
+	params: {
+		id: string
+	}
+}
+
+export function GET(_: Request, context: Context) {
+	const { id } = context.params
 	return redirect(`https://meet.google.com/${id}`)
 }
