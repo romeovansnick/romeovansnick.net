@@ -1,0 +1,159 @@
+name: CI
+on:
+  pull_request: {}
+  push:
+    branches:
+      - main
+env:
+  TERM: vt100
+  CI: 1
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+jobs:
+  formatting:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Read .tool-versions
+        id: versions
+        uses: marocchino/tool-versions-action@v1
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: ${{ steps.versions.outputs.pnpm }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check formatting
+        run: make format
+
+  typecheck:
+    name: Check types
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Read .tool-versions
+        id: versions
+        uses: marocchino/tool-versions-action@v1
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: ${{ steps.versions.outputs.pnpm }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check types
+        run: make typecheck
+
+  lint:
+    name: Check lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Read .tool-versions
+        id: versions
+        uses: marocchino/tool-versions-action@v1
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: ${{ steps.versions.outputs.pnpm }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check lint
+        run: make lint
+
+  test:
+    name: Check tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Read .tool-versions
+        id: versions
+        uses: marocchino/tool-versions-action@v1
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: ${{ steps.versions.outputs.pnpm }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test
+        run: make test
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || ( github.event_name == 'pull_request' && !github.event.pull_request.draft )
+    permissions:
+      contents: read
+      deployments: write
+      actions: read
+    environment:
+      name: Vercel
+      url: ${{ steps.url.outputs.inspect-url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Read .tool-versions
+        id: versions
+        uses: marocchino/tool-versions-action@v1
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: ${{ steps.versions.outputs.pnpm }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodejs }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Pull vercel project
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - uses: yogeshlonkar/wait-for-jobs@v0
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          jobs: "Check formatting,Check types,Check lint,Check tests"
+      - name: Deploy to Vercel (Preview)
+        if: github.event_name == 'pull_request' && !github.event.pull_request.draft
+        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --no-wait --archive=tgz 2>&1 | tee deployment.txt
+      - name: Deploy to Vercel (Production)
+        if: github.ref == 'refs/heads/main'
+        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --no-wait --archive=tgz --prod 2>&1 | tee deployment.txt
+      - name: Read deployment url
+        id: url
+        run: |
+          echo inspect-url=$(cat deployment.txt | grep '.vercel.com/' | awk '{ print $2 }') >> "$GITHUB_OUTPUT"
+          echo preview-url=$(cat deployment.txt | grep '.vercel.app ' | awk '{ print $2 }') >> "$GITHUB_OUTPUT"
+          echo "::notice:: Inspect the deployment at $(cat deployment.txt | grep '.vercel.com/' | awk '{ print $2 }')"
+      - name: Wait for deployment to complete
+        run: vercel inspect --token=${{ secrets.VERCEL_TOKEN }} --wait ${{ steps.url.outputs.preview-url }}
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        with:
+          token: ${{ github.token }}
+          environment-url: ${{ steps.url.outputs.inspect-url }}
+          environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
+          initial-status: success
