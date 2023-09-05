@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@types/react": "18.2.21",
 		"eslint": "^8.48.0",
+		"eslint-plugin-next": "^0.0.0",
 		"prettier": "^3.0.3",
 		"typescript": "^5.2.2",
 		"typescript-plugin-css-modules": "^5.0.1",
