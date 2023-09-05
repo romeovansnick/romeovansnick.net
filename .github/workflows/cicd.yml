@@ -152,10 +152,3 @@ jobs:
           echo "::notice:: Inspect the deployment at $(cat deployment.txt | grep '.vercel.com/' | awk '{ print $2 }')"
       - name: Wait for deployment to complete
         run: vercel inspect --token=${{ secrets.VERCEL_TOKEN }} --wait ${{ steps.url.outputs.preview-url }}
-      - uses: chrnorm/deployment-action@v2
-        name: Create GitHub deployment
-        with:
-          token: ${{ github.token }}
-          environment-url: ${{ steps.url.outputs.inspect-url }}
-          environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
-          initial-status: success
