@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
 
-export function HomePage() {
+export default function HomePage() {
 	return redirect("https://www.romeovansnick.be")
 }
