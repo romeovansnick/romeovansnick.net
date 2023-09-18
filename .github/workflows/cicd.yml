@@ -7,8 +7,6 @@ on:
 env:
   TERM: vt100
   CI: 1
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 jobs:
   formatting:
     name: Check formatting
@@ -130,20 +128,30 @@ jobs:
         with:
           node-version: ${{ steps.versions.outputs.nodejs }}
           cache: pnpm
+      - name: Unlock .env
+        uses: sliteteam/github-action-git-crypt-unlock@1.2.0
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+      - name: Read .env variables
+        uses: romeovs/dotenv@cc5f5c7834c5830cc82c86bc650963aadc4a4750
+        id: env
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Pull vercel project
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token=${{ steps.env.outputs.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ steps.env.outputs.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ steps.env.outputs.VERCEL_PROJECT_ID }}
       - uses: yogeshlonkar/wait-for-jobs@v0
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
           jobs: "Check formatting,Check types,Check lint,Check tests"
       - name: Deploy to Vercel (Preview)
         if: github.event_name == 'pull_request' && !github.event.pull_request.draft
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --no-wait --archive=tgz 2>&1 | tee deployment.txt
+        run: vercel deploy --token=${{ steps.env.outputs.VERCEL_TOKEN }} --no-wait --archive=tgz 2>&1 | tee deployment.txt
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main'
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --no-wait --archive=tgz --prod 2>&1 | tee deployment.txt
+        run: vercel deploy --token=${{ steps.env.outputs.VERCEL_TOKEN }} --no-wait --archive=tgz --prod 2>&1 | tee deployment.txt
       - name: Read deployment url
         id: url
         run: |
@@ -151,6 +159,6 @@ jobs:
           echo preview-url=$(cat deployment.txt | grep '.vercel.app ' | awk '{ print $2 }') >> "$GITHUB_OUTPUT"
           echo "::notice:: Inspect the deployment at $(cat deployment.txt | grep '.vercel.com/' | awk '{ print $2 }')"
       - name: Wait for deployment to complete
-        run: vercel inspect --token=${{ secrets.VERCEL_TOKEN }} --wait ${{ steps.url.outputs.preview-url }} 2>&1 | tee out.txt
+        run: vercel inspect --token=${{ steps.env.outputs.VERCEL_TOKEN }} --wait ${{ steps.url.outputs.preview-url }} 2>&1 | tee out.txt
       - name: Read deployment status
         run: cat out.txt | grep "status" | grep "Ready" || false
