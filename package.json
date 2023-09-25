@@ -7,7 +7,7 @@
 	"author": "Romeo Van Snick <romeo@romeovansnick.be>",
 	"license": "MIT",
 	"dependencies": {
-		"next": "^13.4.19"
+		"next": "^13.5.2"
 	},
 	"devDependencies": {
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
