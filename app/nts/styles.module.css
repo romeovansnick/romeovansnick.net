@@ -55,3 +55,34 @@
 .installation {
 	max-width: 42em;
 }
+
+.gifs {
+	background: #6665ab;
+	display: flex;
+	box-sizing: border-box;
+
+	margin: 4rem 0;
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+
+	div {
+		flex-shrink: 2;
+		position: relative;
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 37%;
+			background: #545499;
+			height: 11%;
+		}
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}

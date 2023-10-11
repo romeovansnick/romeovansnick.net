@@ -4,6 +4,11 @@ import Head from "next/head"
 import icon from "./icon.png"
 import dmg from "./dmg.png"
 
+import open from "./open.png"
+import play from "./play.png"
+import drop from "./drop.png"
+import menu from "./menu.png"
+
 import css from "./styles.module.css"
 
 export default async function NTSPage() {
@@ -21,6 +26,18 @@ export default async function NTSPage() {
 					<div className={css.description}>
 						<p>An unofficial NTS app for your desktop computer.</p>
 						<p>Use NTS without the need for an open browser window.</p>
+					</div>
+				</section>
+
+				<section className={css.gifs}>
+					<div>
+						<img src={play.src} width={play.width / 2} height={play.height / 2} />
+					</div>
+					<div>
+						<img src={drop.src} width={drop.width / 2} height={drop.height / 2} />
+					</div>
+					<div>
+						<img src={menu.src} width={menu.width / 2} height={menu.height / 2} />
 					</div>
 				</section>
 
