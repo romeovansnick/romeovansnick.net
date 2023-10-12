@@ -57,18 +57,33 @@
 }
 
 .gifs {
-	background: #6665ab;
 	display: flex;
 	box-sizing: border-box;
 
 	margin: 4rem 0;
+	border: 13px solid black;
+	border-bottom: 1px solid black;
+
 	overflow: hidden;
-	border-radius: 10px;
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.4);
+	background: black;
 
 	div {
 		flex-shrink: 2;
 		position: relative;
+		background: #6665ab;
+
+		&:first-child {
+			border-top-left-radius: 10px;
+			overflow: hidden;
+		}
+
+		&:last-child {
+			border-top-right-radius: 10px;
+			overflow: hidden;
+		}
 
 		&:before {
 			content: "";
