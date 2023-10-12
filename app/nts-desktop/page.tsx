@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Head from "next/head"
 
 import icon from "./icon.png"
 import dmg from "./dmg.png"
@@ -11,12 +10,13 @@ import menu from "./menu.png"
 
 import css from "./styles.module.css"
 
+export const metadata = {
+	title: "NTS Desktop",
+}
+
 export default async function NTSPage() {
 	return (
 		<>
-			<Head>
-				<title>NTS Desktop</title>
-			</Head>
 			<div className={css.page}>
 				<section className={css.header}>
 					<div className={css.app}>
