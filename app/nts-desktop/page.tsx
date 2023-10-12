@@ -68,9 +68,6 @@ export default async function NTSPage() {
 									Go to the <code>Privacy &amp; Security</code> tab,
 								</li>
 								<li>
-									Go to the <code>Privacy &amp; Security</code> tab,
-								</li>
-								<li>
 									Scroll down and click <code>Open Anyway</code>,
 								</li>
 								<li>
