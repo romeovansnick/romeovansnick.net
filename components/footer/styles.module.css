@@ -1,0 +1,56 @@
+.footer {
+	background: black;
+	color: white;
+
+	width: 100%;
+	box-sizing: border-box;
+
+	padding: 5em;
+	padding-bottom: 2em;
+
+	font-smooth: grayscale;
+	-moz-osx-font-smoothing: grayscale;
+
+	.main {
+		display: flex;
+		gap: 1rem;
+		padding-bottom: 4em;
+		font-size: 16px;
+		line-height: 1.4em;
+	}
+
+	.foot {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 12px;
+	}
+
+	a {
+		color: rgba(255, 255, 255, 0.5);
+		text-decoration: none;
+	}
+
+	.titles {
+		width: 50%;
+	}
+
+	h1 {
+		font-size: 1em;
+		font-weight: normal;
+		margin: 0;
+		padding: 0;
+	}
+
+	h2 {
+		font-size: 1em;
+		margin: 0;
+		padding: 0;
+		font-weight: normal;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
