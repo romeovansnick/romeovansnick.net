@@ -8,7 +8,7 @@
 	},
 	"devDependencies": {
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
-		"@types/react": "18.2.21",
+		"@types/react": "18.2.36",
 		"eslint": "^8.51.0",
 		"eslint-config-next": "13.4.19",
 		"postcss-flexbugs-fixes": "^5.0.2",
