@@ -7,3 +7,12 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.content {
+	display: flex;
+	gap: 5rem;
+	flex-wrap: wrap;
+	padding: 5rem;
+	box-sizing: border-box;
+	margin-bottom: 10rem;
+}
