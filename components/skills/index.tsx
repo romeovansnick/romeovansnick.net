@@ -52,8 +52,8 @@ export function Skills() {
 					const last = idx === arr.length - 1
 					const years = skills[skill] ?? 0
 					return (
-						<li role="listitem">
-							<span className={css.skill} key={skill}>
+						<li role="listitem" key={skill}>
+							<span className={css.skill}>
 								{skill}
 								{years > 0 && <span> {years}yrs</span>}
 							</span>
