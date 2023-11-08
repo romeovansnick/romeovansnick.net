@@ -4,7 +4,7 @@ export function Header() {
 	return (
 		<header className={css.header}>
 			<div className={css.hello}>
-				Hi, I'm <h1>Romeo</h1>
+				Hi, I'm <h1>Romeo</h1>.
 			</div>
 			<div className={css.role}>
 				<em>Software Engineer</em> at <em>Discogs.</em>
