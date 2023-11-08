@@ -30,9 +30,6 @@ export function Footer() {
 							</a>
 						</li>
 						<li>
-							<a href="/resume">Résumé</a>
-						</li>
-						<li>
 							<a href={repo} target="_blank" rel="noopener noreferrer">
 								Repository
 							</a>
