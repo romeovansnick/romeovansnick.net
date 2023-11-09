@@ -19,3 +19,9 @@ code {
 :root {
 	--highlight: #5e19ff;
 }
+
+a {
+	color: var(--highlight, blue);
+	text-decoration-line: underline;
+	text-decoration-thickness: 1.5px;
+}
