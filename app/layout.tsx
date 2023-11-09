@@ -16,10 +16,8 @@ export default function Layout(props: Props) {
 	return (
 		<html lang="en">
 			<body>
-				<div className={css.page}>
-					{props.children}
-					<Footer />
-				</div>
+				<div className={css.page}>{props.children}</div>
+				<Footer />
 			</body>
 		</html>
 	)
