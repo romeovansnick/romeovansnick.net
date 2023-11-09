@@ -22,12 +22,12 @@ export default function PrivacyStatementPage() {
 			<p>
 				Romeo Van Snick processes your personal data because you use our services and/or because you provide it to us
 				yourself. Below you will find an overview of the personal data we process:
-				<ul>
-					<li>First and last name,</li>
-					<li>Telephone number</li>
-					<li>Email address</li>
-				</ul>
 			</p>
+			<ul>
+				<li>First and last name,</li>
+				<li>Telephone number</li>
+				<li>Email address</li>
+			</ul>
 
 			<p>
 				Our website and/or service does not intend to collect data about website visitors who are younger than 16 years
@@ -37,19 +37,17 @@ export default function PrivacyStatementPage() {
 				have collected personal information about a minor without this consent, please contact us at
 				contact@romeovansnick.net and we will delete this information.
 			</p>
-			<p>
-				Romeo Van Snick processes your personal data for the following purposes:
-				<ul>
-					<li>Processing your payment,</li>
-					<li>To be able to call or email you if this is necessary to provide our services,</li>
-					<li>To inform you about changes to our services and products,</li>
-					<li>To deliver goods and services, and</li>
-					<li>
-						Romeo Van Snick also processes personal data if we are legally obliged to do so, such as data we need for
-						our tax return.
-					</li>
-				</ul>
-			</p>
+			<p>Romeo Van Snick processes your personal data for the following purposes:</p>
+			<ul>
+				<li>Processing your payment,</li>
+				<li>To be able to call or email you if this is necessary to provide our services,</li>
+				<li>To inform you about changes to our services and products,</li>
+				<li>To deliver goods and services, and</li>
+				<li>
+					Romeo Van Snick also processes personal data if we are legally obliged to do so, such as data we need for our
+					tax return.
+				</li>
+			</ul>
 			<p>
 				Romeo Van Snick does not store your personal data for longer than is strictly necessary to achieve the purposes
 				for which your data is collected. We use the following retention periods for the following (categories) of
