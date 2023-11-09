@@ -1,3 +1,4 @@
+import Link from "next/link"
 import css from "./styles.module.css"
 
 const github = "https://github.com/romeovs"
@@ -39,7 +40,9 @@ export function Footer() {
 					</ul>
 				</nav>
 			</div>
-			<div className={css.foot}>Copyright &copy; 2023 Romeo Van Snick.</div>
+			<div className={css.foot}>
+				Copyright &copy; 2023 Romeo Van Snick &mdash; <Link href="/privacy-statement">Privacy Statement</Link>
+			</div>
 		</footer>
 	)
 }
