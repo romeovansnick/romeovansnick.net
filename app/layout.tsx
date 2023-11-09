@@ -1,5 +1,9 @@
 import "./global.css"
 
+import { Footer } from "~/components/footer"
+
+import css from "./styles.module.css"
+
 type Props = {
 	children: React.ReactNode
 }
@@ -7,7 +11,12 @@ type Props = {
 export default function Layout(props: Props) {
 	return (
 		<html lang="en">
-			<body>{props.children}</body>
+			<body>
+				<div className={css.page}>
+					{props.children}
+					<Footer />
+				</div>
+			</body>
 		</html>
 	)
 }
