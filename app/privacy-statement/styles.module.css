@@ -1,0 +1,12 @@
+.page {
+	max-width: 44rem;
+	box-sizing: border-box;
+	margin-top: 15rem;
+	margin-bottom: 10rem;
+}
+
+.title {
+	composes: outline from "~/components/shared.module.css";
+	display: inline-block;
+	font-size: 1.2em;
+}

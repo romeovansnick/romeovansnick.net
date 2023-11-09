@@ -1,0 +1,12 @@
+.outline {
+	background: black;
+	color: white;
+	padding: 0.25em 0.5em;
+	border-radius: 4px;
+	white-space: nowrap;
+	font-style: normal;
+	font-weight: 400;
+
+	font-smooth: grayscale;
+	-moz-osx-font-smoothing: grayscale;
+}
