@@ -33,7 +33,7 @@
 .skill {
 	span {
 		font-size: 0.8em;
-		color: #5e19ff;
+		color: var(--highlight);
 		margin: 0;
 		margin-left: 0.5em;
 	}
