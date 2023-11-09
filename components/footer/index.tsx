@@ -11,7 +11,9 @@ export function Footer() {
 		<footer className={css.footer}>
 			<div className={css.main}>
 				<div className={css.titles}>
-					<h1>Romeo Van Snick</h1>
+					<h1>
+						<Link href="/">Romeo Van Snick</Link>
+					</h1>
 					<h2>
 						Software Engineering <br /> and Consultancy
 					</h2>
