@@ -10,7 +10,7 @@
 		"@jamesacarr/eslint-formatter-github-actions": "^0.2.0",
 		"@types/react": "18.2.21",
 		"eslint": "^8.51.0",
-		"eslint-config-next": "13.4.19",
+		"eslint-config-next": "14.0.2",
 		"postcss-flexbugs-fixes": "^5.0.2",
 		"postcss-nested": "^6.0.1",
 		"postcss-preset-env": "^9.2.0",
