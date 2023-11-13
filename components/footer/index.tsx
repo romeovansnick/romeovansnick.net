@@ -4,7 +4,7 @@ import css from "./styles.module.css"
 const github = "https://github.com/romeovs"
 const linkedIn = "https://www.linkedin.com/in/romeo-van-snick-109894120/"
 const repo = "https://github.com/romeovs/romeovansnick.net"
-const email = "mailto:hello@romeovansnick.net"
+const email = "mailto:contact@romeovansnick.net"
 
 export function Footer() {
 	return (
